@@ -12,7 +12,7 @@
         android:id="@+id/host_nav"
         android:layout_width="0sp"
         android:layout_height="0sp"
-        app:navGraph="@navigation/zeft"
+        app:navGraph="@navigation/navigation_layout"
         android:name="androidx.navigation.fragment.NavHostFragment"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/bot_nav"

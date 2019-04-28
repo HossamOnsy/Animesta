@@ -9,14 +9,14 @@ import android.view.ViewGroup
 
 import com.sam.animesta.R
 
-class ShamamaFragment : Fragment() {
+class SearchFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shamama, container, false)
+        return inflater.inflate(R.layout.fragment_search, container, false)
     }
 
 

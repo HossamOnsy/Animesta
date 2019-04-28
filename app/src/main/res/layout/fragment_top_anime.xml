@@ -3,10 +3,10 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context=".navigation.TopAnimeBate5a5Fragment">
+             tools:context=".navigation.TopAnimeFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_topanime"
+            android:id="@+id/rv_top"
             android:layout_width="match_parent"
                                                android:layout_height="match_parent">
 

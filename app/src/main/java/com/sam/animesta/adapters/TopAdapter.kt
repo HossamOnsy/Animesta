@@ -24,7 +24,6 @@ class TopAdapter(var c: FragmentActivity?, var list: ArrayList<TopModel>) :
     fun updateList(topModelList: List<TopModel>) {
         list.addAll(topModelList)
         notifyDataSetChanged()
-
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

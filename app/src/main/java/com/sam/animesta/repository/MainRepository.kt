@@ -13,10 +13,14 @@ import com.sam.animesta.AppDatabase
 import com.sam.animesta.model.DBDao
 import com.sam.animesta.utils.BASE_URL
 import com.sam.animesta.model.TopAnimeResponseModel
+import com.sam.animesta.model.TopModel
 import com.sam.animesta.presenter.MainPresenter
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 import timber.log.Timber
+import java.util.*
 import javax.inject.Inject
 
 
@@ -26,55 +30,51 @@ class MainRepository @Inject constructor() {
     lateinit var mainPresenter : MainPresenter
 
 
-    fun getTopAnime( dao:DBDao,context: Context,page:Int) {
-
-        // Instantiate the RequestQueue.
+    fun getTopAnime(dao:DBDao,context: Context,page:Int) {
         val queue = Volley.newRequestQueue(context)
-        val url = "$BASE_URL/v3/top/anime/1"
-
-// Request a string response from the provided URL.
+        val url = "$BASE_URL/v3/top/anime/$page"
         val stringRequest = StringRequest(
             Request.Method.GET, url,
             Response.Listener<String> { response ->
                 var gson = Gson()
                 var jsonResponse = gson.fromJson(response, TopAnimeResponseModel::class.java)
-
-//                longInfo(response)
-                var i =0;
-//                Timber.d("jsonResponse >- ${response}")
-                Log.v("responseresponse","response -> " + response)
-
-
-                for (test  in 0..jsonResponse.top.size-1){
-                    Log.v("responseresponse","response -> " + jsonResponse.top.get(test))
+                for (test  in 0..jsonResponse.top.size-1) {
                     val x = jsonResponse.top.get(test)
-
-//                    x.id = i+1
-//                    i = i + 1
-
-                    dao.insert(x)
-
-
+                    doAsync {
+                        dao.insert(x)
+                        uiThread {
+                        }
+                    }
                 }
-
-
-//                mainPresenter.dataFetched(jsonResponse.top)
-                //TODO Call Interface of Presenter
-
+                mainPresenter.dataFetched(jsonResponse.top)
             },
-            Response.ErrorListener { error -> Timber.d("Testing : ${error.message}") })
-
-// Add the request to the RequestQueue.
+            Response.ErrorListener { error -> Timber.d("Testing anime : ${error.message}") })
         queue.add(stringRequest)
 
+    }
+
+    fun getTopManga(dao:DBDao,context: Context,page:Int) {
+        val queue = Volley.newRequestQueue(context)
+        val url = "$BASE_URL/v3/top/manga/$page"
+        val stringRequest = StringRequest(
+            Request.Method.GET, url,
+            Response.Listener<String> { response ->
+                var gson = Gson()
+                var jsonResponse = gson.fromJson(response, TopAnimeResponseModel::class.java)
+                for (test  in 0..jsonResponse.top.size-1) {
+                    val x = jsonResponse.top.get(test)
+                    doAsync {
+                        dao.insert(x)
+                        uiThread {
+                        }
+                    }
+                }
+                mainPresenter.dataFetched(jsonResponse.top)
+            },
+            Response.ErrorListener { error -> Timber.d("Testing manga : ${error.message}") })
+        queue.add(stringRequest)
 
     }
 
-    fun longInfo(str: String) {
-        if (str.length > 4000) {
-            Log.v("responseresponse", str)
-            longInfo(str.substring(4000))
-        } else
-            Log.v("responseresponse", str)
-    }
+
 }

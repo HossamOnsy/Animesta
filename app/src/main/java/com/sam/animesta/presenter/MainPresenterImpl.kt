@@ -9,7 +9,9 @@ import com.sam.animesta.repository.MainRepository
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import timber.log.Timber
+import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 class MainPresenterImpl  @Inject constructor(var repository: MainRepository) : MainPresenter{
 
@@ -32,22 +34,52 @@ class MainPresenterImpl  @Inject constructor(var repository: MainRepository) : M
         this.context = context!!
         db = Room.databaseBuilder(context, AppDatabase::class.java, "TopModelData")
             .fallbackToDestructiveMigration()
-            .allowMainThreadQueries()
+
             .build()
         var dao = db.dbDao()
 
         doAsync{
-            var t = dao.getAllModels()
+            var t = dao.getAnimeModels()
             uiThread {
                 Timber.v("Title Size -> ${t.size}")
                 for (i in t){
-                    Timber.v("Title -> ${i.title}")
+                    Timber.v("Title -> ${i.rank}   rank  ->  ${i.title}")
                 }
 
                 if(t.size>0){
+//                    var temo = ArrayList<TopModel>(t)
+//                    Collections.reverse(temo);
                     dataFetched(t)
                 }else{
                     repository.getTopAnime(dao,context,page)
+                }
+            }
+        }
+    }
+
+
+    fun getTopManga(context: FragmentActivity?, page:Int) {
+        this.context = context!!
+        db = Room.databaseBuilder(context, AppDatabase::class.java, "TopModelData")
+            .fallbackToDestructiveMigration()
+
+            .build()
+        var dao = db.dbDao()
+
+        doAsync{
+            var t = dao.getMangaModels()
+            uiThread {
+                Timber.v("Title Size -> ${t.size}")
+                for (i in t){
+                    Timber.v("Title -> ${i.rank}   rank  ->  ${i.title}")
+                }
+
+                if(t.size>0){
+//                    var temo = ArrayList<TopModel>(t)
+//                    Collections.reverse(temo);
+                    dataFetched(t)
+                }else{
+                    repository.getTopManga(dao,context,page)
                 }
             }
         }

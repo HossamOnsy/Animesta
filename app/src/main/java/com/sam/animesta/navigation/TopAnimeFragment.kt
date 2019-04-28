@@ -13,20 +13,20 @@ import com.sam.animesta.di.DaggerActivityComponent
 import com.sam.animesta.model.TopModel
 import com.sam.animesta.presenter.MainActivityView
 import com.sam.animesta.presenter.MainPresenterImpl
-import kotlinx.android.synthetic.main.fragment_top_anime_bate5a5.*
+import kotlinx.android.synthetic.main.fragment_top_anime.*
 import javax.inject.Inject
 
 
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [TopAnimeBate5a5Fragment.OnFragmentInteractionListener] interface
+ * [TopAnimeFragment.OnFragmentInteractionListener] interface
  * to handle interaction events.
- * Use the [TopAnimeBate5a5Fragment.newInstance] factory method to
+ * Use the [TopAnimeFragment.newInstance] factory method to
  * create an instance of this fragment.
  *
  */
-class TopAnimeBate5a5Fragment : Fragment() , MainActivityView {
+class TopAnimeFragment : Fragment() , MainActivityView {
 
     @Inject
     lateinit var mainPresenterImpl: MainPresenterImpl
@@ -38,7 +38,7 @@ class TopAnimeBate5a5Fragment : Fragment() , MainActivityView {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_top_anime_bate5a5, container, false)
+        return inflater.inflate(R.layout.fragment_top_anime, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -48,9 +48,9 @@ class TopAnimeBate5a5Fragment : Fragment() , MainActivityView {
 
 
         topAdapter = TopAdapter(activity,ArrayList())
-        rv_topanime.adapter = topAdapter
-        rv_topanime.layoutManager= GridLayoutManager(activity,2)
-        rv_topanime.setHasFixedSize(false)
+        rv_top.adapter = topAdapter
+        rv_top.layoutManager= GridLayoutManager(activity,2)
+        rv_top.setHasFixedSize(false)
 
         mainPresenterImpl.mainActivityView = this
         mainPresenterImpl.getTopAnime(activity, 1)

@@ -13,9 +13,11 @@ interface DBDao {
 //    fun deleteModel(id: Int,favorite:Boolean)
 
 
-    @Query("SELECT *  FROM TopModelData")
-    fun getAllModels() : List<TopModel>
+    @Query("SELECT *  FROM TopModelData WHERE  type != \"Manga\" AND type !=\"Novel\"")
+    fun getAnimeModels() : List<TopModel>
 
+    @Query("SELECT *  FROM TopModelData WHERE type = \"Manga\" AND type =\"Novel\"")
+    fun getMangaModels() : List<TopModel>
 
 //    @Insert
 //    fun insert(vararg topAnimeResponseModel: TopAnimeResponseModel)
