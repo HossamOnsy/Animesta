@@ -1,0 +1,16 @@
+package com.sam.animesta.utils
+
+import android.widget.ImageView
+import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
+import com.sam.animesta.R
+
+
+@BindingAdapter("imageUrl")
+fun loadImage(view: ImageView, imageUrl: String) {
+    Glide.with(view.getContext())
+        .load(imageUrl)
+        .placeholder(R.drawable.loading)
+        .into(view)
+
+}

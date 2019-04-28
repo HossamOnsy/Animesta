@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+            android:id="@+id/topAnimeBate5a5"
+            android:title="topAnimeBate5a5"
+            android:icon="@android:drawable/btn_minus"
+        />
+    <item
+            android:id="@+id/kometra"
+            android:title="kometra"
+            android:icon="@android:drawable/btn_default"
+    />
+    <item
+            android:id="@+id/shamama"
+            android:title="shamama"
+            android:icon="@android:drawable/btn_plus"
+    />
+</menu>
