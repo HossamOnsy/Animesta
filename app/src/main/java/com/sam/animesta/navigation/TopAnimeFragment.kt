@@ -63,7 +63,7 @@ class TopAnimeFragment : Fragment() , TopAnimeMangaView {
 
     override fun onDataFetch(topModelList: List<TopModel>) {
         if(progressbar!=null)
-        progressbar.visibility = View.GONE
+            progressbar.visibility = View.GONE
 
         topAdapter.updateList(topModelList)
     }

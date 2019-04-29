@@ -61,7 +61,13 @@ class MainPresenterImpl @Inject constructor(var repository: MainRepository) : Ma
             }
         }
     }
+    fun getsearchResults(query : String ,context: FragmentActivity?, page: Int) {
 
+                this.context = context!!
+                repository.getSearchResults(query, context, page)
+
+
+    }
 
     override fun dataFetched(topModelList: List<TopModel>) {
 

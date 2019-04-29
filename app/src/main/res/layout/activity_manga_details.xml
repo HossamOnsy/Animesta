@@ -14,7 +14,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".ui.MangaDetails">
+            tools:context=".ui.MangaDetailsActivity">
 
         <ImageView
                 android:id="@+id/iv_detail_image"
@@ -27,6 +27,18 @@
                 android:scaleType="fitXY"
                 app:imageUrl="@{topManga.image_url}"
         />
+
+        <ImageView
+                android:id="@+id/iv_website"
+                android:layout_width="50sp"
+                android:layout_height="50sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/rb_rating"
+                app:layout_constraintStart_toEndOf="@id/rb_rating"
+                android:scaleType="fitXY"
+                android:src="@drawable/web"
+                app:layout_constraintBottom_toBottomOf="@+id/rb_rating"/>
+
 
         <TextView
                 android:id="@+id/tv_title"
@@ -42,6 +54,8 @@
                    style="?ratingBarStyleIndicator"
                    android:rating="@{topManga.convertScore()}"
                    app:layout_constraintEnd_toEndOf="parent"/>
+
+
         <androidx.constraintlayout.widget.Guideline android:layout_width="wrap_content"
                                                     android:layout_height="wrap_content" android:id="@+id/guidelineH60"
                                                     app:layout_constraintGuide_percent="0.6"

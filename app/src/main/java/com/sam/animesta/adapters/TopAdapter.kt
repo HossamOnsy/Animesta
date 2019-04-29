@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sam.animesta.model.TopModel
 import androidx.databinding.DataBindingUtil
 import com.sam.animesta.databinding.TopItemBinding
-import com.sam.animesta.ui.MangaDetails
+import com.sam.animesta.ui.AnimeDetailsActivity
+import com.sam.animesta.ui.MangaDetailsActivity
 import kotlinx.android.synthetic.main.top_item.view.*
-import org.jetbrains.anko.startActivity
 
 
 class TopAdapter(var from :String,var c: FragmentActivity?, var list: ArrayList<TopModel>) :
@@ -26,6 +26,11 @@ class TopAdapter(var from :String,var c: FragmentActivity?, var list: ArrayList<
         list.addAll(topModelList)
         notifyDataSetChanged()
     }
+    fun clearList() {
+        list.clear()
+        notifyDataSetChanged()
+    }
+
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
@@ -44,7 +49,9 @@ class TopAdapter(var from :String,var c: FragmentActivity?, var list: ArrayList<
 
             itemView.setOnClickListener {
                 if(from.equals("Manga")){
-                    itemView.context.startActivity(Intent(itemView.context, MangaDetails::class.java).putExtra("Model",item))
+                    itemView.context.startActivity(Intent(itemView.context, MangaDetailsActivity::class.java).putExtra("Model",item))
+                }else{
+                    itemView.context.startActivity(Intent(itemView.context, AnimeDetailsActivity::class.java).putExtra("id",item.mal_id))
                 }
             }
 
