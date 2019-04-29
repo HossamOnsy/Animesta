@@ -1,26 +1,18 @@
 package com.sam.animesta.repository
 
 import android.content.Context
-import android.util.Log
-import androidx.room.Dao
-import androidx.room.Room
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
-import com.sam.animesta.AppDatabase
 import com.sam.animesta.model.DBDao
 import com.sam.animesta.utils.BASE_URL
 import com.sam.animesta.model.TopAnimeResponseModel
-import com.sam.animesta.model.TopModel
 import com.sam.animesta.presenter.MainPresenter
-import io.reactivex.Observable
-import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import timber.log.Timber
-import java.util.*
 import javax.inject.Inject
 
 
@@ -48,7 +40,7 @@ class MainRepository @Inject constructor() {
                 }
                 mainPresenter.dataFetched(jsonResponse.top)
             },
-            Response.ErrorListener { error -> Timber.d("Testing anime : ${error.message}") })
+            Response.ErrorListener { error -> mainPresenter.errorOccured(error) })
         queue.add(stringRequest)
 
     }

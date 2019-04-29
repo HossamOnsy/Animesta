@@ -1,18 +1,19 @@
 package com.sam.animesta.adapters
 
+import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.sam.animesta.model.TopModel
 import androidx.databinding.DataBindingUtil
 import com.sam.animesta.databinding.TopItemBinding
-import com.sam.animesta.databinding.TopItemBindingImpl
+import com.sam.animesta.ui.MangaDetails
 import kotlinx.android.synthetic.main.top_item.view.*
+import org.jetbrains.anko.startActivity
 
 
-class TopAdapter(var c: FragmentActivity?, var list: ArrayList<TopModel>) :
+class TopAdapter(var from :String,var c: FragmentActivity?, var list: ArrayList<TopModel>) :
     RecyclerView.Adapter<TopAdapter.ViewHolder>() {
 
 
@@ -28,7 +29,7 @@ class TopAdapter(var c: FragmentActivity?, var list: ArrayList<TopModel>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.bind(list.get(position))
+        holder.bind(list.get(position),from)
 
     }
 
@@ -37,11 +38,16 @@ class TopAdapter(var c: FragmentActivity?, var list: ArrayList<TopModel>) :
 
     class ViewHolder(private val  topItemBinding: TopItemBinding) : RecyclerView.ViewHolder(topItemBinding.root) {
 
-        fun bind(item: TopModel) {
+        fun bind(item: TopModel, from: String) {
                 topItemBinding.topModel = item
-            if (item.score != null) {
                 itemView.rb_rating.rating = (item.score /2.0).toFloat()
+
+            itemView.setOnClickListener {
+                if(from.equals("Manga")){
+                    itemView.context.startActivity(Intent(itemView.context, MangaDetails::class.java).putExtra("Model",item))
+                }
             }
+
         }
 
     }

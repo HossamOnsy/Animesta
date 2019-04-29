@@ -9,18 +9,12 @@ import androidx.room.Query
 @Dao
 interface DBDao {
 
-//    @Query("DELETE  FROM MovieDetailModel Where id = :id and favorite = :favorite ")
-//    fun deleteModel(id: Int,favorite:Boolean)
-
 
     @Query("SELECT *  FROM TopModelData WHERE  type != \"Manga\" AND type !=\"Novel\"")
     fun getAnimeModels() : List<TopModel>
 
-    @Query("SELECT *  FROM TopModelData WHERE type = \"Manga\" AND type =\"Novel\"")
+    @Query("SELECT *  FROM TopModelData WHERE type = \"Manga\" OR type =\"Novel\"")
     fun getMangaModels() : List<TopModel>
-
-//    @Insert
-//    fun insert(vararg topAnimeResponseModel: TopAnimeResponseModel)
 
     @Insert
     fun insert(topModel: TopModel)

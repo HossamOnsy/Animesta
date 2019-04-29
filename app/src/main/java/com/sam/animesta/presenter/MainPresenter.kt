@@ -1,11 +1,12 @@
 package com.sam.animesta.presenter
 
-import com.sam.animesta.AppDatabase
+import com.android.volley.VolleyError
 import com.sam.animesta.model.TopModel
 
 
 interface MainPresenter {
 
-    fun dataFetched(jsonResponse: List<TopModel>);
+    fun dataFetched(topModelList: List<TopModel>)
+    fun errorOccured(error: VolleyError)
 
 }
