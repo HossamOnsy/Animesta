@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.room.Room
 import com.android.volley.VolleyError
 import com.sam.animesta.AppDatabase
+import com.sam.animesta.R
 import com.sam.animesta.model.TopModel
 import com.sam.animesta.repository.MainRepository
 import org.jetbrains.anko.doAsync
@@ -25,7 +26,7 @@ class MainPresenterImpl @Inject constructor(var repository: MainRepository) : Ma
 
     fun getTopAnime(firstTime : Boolean,context: FragmentActivity?,  page: Int) {
         this.context = context!!
-        db = Room.databaseBuilder(context, AppDatabase::class.java, "TopModelData")
+        db = Room.databaseBuilder(context, AppDatabase::class.java, context.getString(R.string.DatabaseName))
             .fallbackToDestructiveMigration()
             .build()
         val dao = db.dbDao()
@@ -54,7 +55,7 @@ class MainPresenterImpl @Inject constructor(var repository: MainRepository) : Ma
 
     fun getTopManga(context: FragmentActivity?, page: Int) {
         this.context = context!!
-        db = Room.databaseBuilder(context, AppDatabase::class.java, "TopModelData")
+        db = Room.databaseBuilder(context, AppDatabase::class.java,  context.getString(R.string.DatabaseName))
             .fallbackToDestructiveMigration()
             .build()
         val dao = db.dbDao()

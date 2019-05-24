@@ -2,17 +2,23 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/zeft"
-            app:startDestination="@id/topAnimeBate5a5">
+            app:startDestination="@id/top_anime_fragment">
 
 
-    <fragment android:id="@+id/topAnimeBate5a5" android:name="com.sam.animesta.navigation.TopAnimeFragment"
-              android:label="fragment_top_anime_bate5a5" tools:layout="@layout/fragment_top_anime">
-        <action android:id="@+id/action_topAnimeBate5a5_to_kometra" app:destination="@id/kometra"/>
+    <fragment android:id="@+id/top_anime_fragment" android:name="com.sam.animesta.navigation.TopAnimeFragment"
+              android:label="top_anime_fragment" tools:layout="@layout/fragment_top_anime">
+
+        <action android:id="@+id/action_top_anime_fragment_to_top_manga_fragment"
+                app:destination="@id/top_manga_fragment"/>
     </fragment>
-    <fragment android:id="@+id/kometra" android:name="com.sam.animesta.navigation.TopMangaFragment"
-              android:label="fragment_kometra" tools:layout="@layout/fragment_top_manga">
-        <action android:id="@+id/action_kometra_to_shamama" app:destination="@id/shamama"/>
+    <fragment android:id="@+id/top_manga_fragment" android:name="com.sam.animesta.navigation.TopMangaFragment"
+              android:label="top_manga_fragment" tools:layout="@layout/fragment_top_manga">
+
+        <action android:id="@+id/action_top_manga_fragment_to_search_fragment" app:destination="@id/search_fragment"/>
     </fragment>
-    <fragment android:id="@+id/shamama" android:name="com.sam.animesta.navigation.SearchFragment"
-              android:label="fragment_shamama" tools:layout="@layout/fragment_search"/>
+    <fragment android:id="@+id/search_fragment" android:name="com.sam.animesta.navigation.SearchFragment"
+              android:label="fragment_search" tools:layout="@layout/fragment_search">
+        <action android:id="@+id/action_search_fragment_to_top_anime_fragment"
+                app:destination="@id/top_anime_fragment"/>
+    </fragment>
 </navigation>

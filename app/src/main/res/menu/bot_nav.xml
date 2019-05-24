@@ -2,18 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-            android:id="@+id/topAnimeBate5a5"
-            android:title="topAnimeBate5a5"
+            android:id="@+id/top_anime_fragment"
+            android:title="@string/anime"
             android:icon="@android:drawable/btn_minus"
         />
     <item
-            android:id="@+id/kometra"
-            android:title="kometra"
+            android:id="@+id/top_manga_fragment"
+            android:title="@string/manga"
             android:icon="@android:drawable/btn_default"
     />
     <item
-            android:id="@+id/shamama"
-            android:title="shamama"
+            android:id="@+id/search_fragment"
+            android:title="@string/search"
             android:icon="@android:drawable/btn_plus"
     />
 </menu>

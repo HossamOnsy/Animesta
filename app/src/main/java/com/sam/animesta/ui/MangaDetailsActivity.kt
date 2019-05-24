@@ -8,6 +8,7 @@ import com.sam.animesta.model.TopModel
 import kotlinx.android.synthetic.main.activity_manga_details.*
 import android.content.Intent
 import android.net.Uri
+import com.sam.animesta.R
 
 
 class MangaDetailsActivity : AppCompatActivity() {
@@ -17,8 +18,8 @@ class MangaDetailsActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, com.sam.animesta.R.layout.activity_manga_details)
 
-        if (intent.hasExtra("Model")) {
-            binding.topManga = intent.getParcelableExtra<TopModel>("Model")
+        if (intent.hasExtra(getString(R.string.model))) {
+            binding.topManga = intent.getParcelableExtra<TopModel>(getString(R.string.model))
             setlistener()
         }
     }

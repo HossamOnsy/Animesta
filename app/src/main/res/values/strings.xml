@@ -3,4 +3,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="anime">Anime</string>
+    <string name="manga">Manga</string>
+    <string name="search">Search</string>
+    <string name="model">Model</string>
+    <string name="DatabaseName">TopModelData</string>
 </resources>
