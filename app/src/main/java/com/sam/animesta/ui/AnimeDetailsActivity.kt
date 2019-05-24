@@ -29,18 +29,23 @@ import at.huber.youtubeExtractor.YtFile
 import at.huber.youtubeExtractor.YouTubeExtractor
 
 
-
-
-
-
-
-
 class AnimeDetailsActivity : AppCompatActivity() , AnimeDetails{
 
     @Inject
     lateinit var detailsPresenter: DetailsPresenterImpl
 
     lateinit var binding : ActivityAnimeDetailsBinding
+
+    var xyz : String="2"
+
+    init{
+        startX()
+    }
+
+    fun startX() : Int {
+        xyz = "3"
+        return 0
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,7 +71,7 @@ class AnimeDetailsActivity : AppCompatActivity() , AnimeDetails{
         container.visibility= VISIBLE
         progressbar.visibility = GONE
         if(animeDetailsModel.trailerUrl!=null)
-         initializePlayer(animeDetailsModel.trailerUrl)
+            initializePlayer(animeDetailsModel.trailerUrl)
 
     }
 

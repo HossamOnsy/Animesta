@@ -23,22 +23,31 @@ class MainPresenterImpl @Inject constructor(var repository: MainRepository) : Ma
         repository.mainPresenter = this
     }
 
-    fun getTopAnime(context: FragmentActivity?, page: Int) {
+    fun getTopAnime(firstTime : Boolean,context: FragmentActivity?,  page: Int) {
         this.context = context!!
         db = Room.databaseBuilder(context, AppDatabase::class.java, "TopModelData")
             .fallbackToDestructiveMigration()
             .build()
         val dao = db.dbDao()
 
-        doAsync {
-            val t = dao.getAnimeModels()
-            uiThread {
-                if (t.size > 0) {
-                    dataFetched(t)
-                } else {
-                    repository.getTopAnime(dao, context, page)
+
+
+
+
+        if(firstTime) {
+            doAsync {
+                val t = dao.getAnimeModels()
+                uiThread {
+                    if (t.size > 0) {
+                        dataFetched(t)
+                        repository.getTopAnime(dao, context, page+1, ArrayList<TopModel>())
+                    } else {
+                        repository.getTopAnime(dao, context, page, ArrayList<TopModel>())
+                    }
                 }
             }
+        }else{
+            repository.getTopAnime(dao, context, page,ArrayList<TopModel>())
         }
     }
 

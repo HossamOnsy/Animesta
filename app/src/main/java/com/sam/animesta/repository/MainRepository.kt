@@ -9,6 +9,7 @@ import com.google.gson.Gson
 import com.sam.animesta.model.DBDao
 import com.sam.animesta.utils.BASE_URL
 import com.sam.animesta.model.TopAnimeResponseModel
+import com.sam.animesta.model.TopModel
 import com.sam.animesta.model.detailedmodel.AnimeDetailsModel
 import com.sam.animesta.presenter.MainPresenter
 import org.jetbrains.anko.doAsync
@@ -22,7 +23,7 @@ class MainRepository @Inject constructor() {
     lateinit var mainPresenter : MainPresenter
 
 
-    fun getTopAnime(dao:DBDao,context: Context,page:Int) {
+    fun getTopAnime(dao:DBDao,context: Context,page:Int,al : ArrayList<TopModel>) {
         val queue = Volley.newRequestQueue(context)
         val url = "$BASE_URL/v3/top/anime/$page"
         val stringRequest = StringRequest(
@@ -38,7 +39,14 @@ class MainRepository @Inject constructor() {
                         }
                     }
                 }
-                mainPresenter.dataFetched(jsonResponse.top)
+
+                val sharedPreference =  context.getSharedPreferences("PREF_FILE",Context.MODE_PRIVATE)
+                val editor = sharedPreference.edit()
+                editor.putInt("page",page)
+                editor.apply()
+
+                al.addAll(jsonResponse.top)
+                mainPresenter.dataFetched(al)
             },
             Response.ErrorListener { error -> mainPresenter.errorOccured(error) })
         queue.add(stringRequest)
